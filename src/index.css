@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #06151A;
+  --color-gradiente: linear-gradient(180deg, #17E4B9 0%, #091D24 100%);
+  --color-verde-destaque: #17D9B1;
+  --color-cinza-medio: #4A4949;
+  --color-grafite: #212121;
+}
+
+body {
+  background-color: var(--color-background);
+  overflow-x: hidden;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.text {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.gradiente {
+  background: var(--color-gradiente);
+}
