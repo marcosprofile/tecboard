@@ -8,6 +8,10 @@
   --color-grafite: #212121;
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-background);
   overflow-x: hidden;

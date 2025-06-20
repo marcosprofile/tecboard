@@ -8,6 +8,7 @@ export default function HeroSection() {
         lg:h-150
         relative
         px-4
+        w-screen
       "
     >
       <p

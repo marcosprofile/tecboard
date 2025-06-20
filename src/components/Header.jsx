@@ -6,6 +6,7 @@ export default function Header() {
         py-8
         flex
         justify-center
+        w-screen
         sticky
         top-0
         z-10
