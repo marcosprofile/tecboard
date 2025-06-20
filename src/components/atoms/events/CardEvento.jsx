@@ -2,7 +2,7 @@ import TagEvento from "./TagEvento";
 
 export default function CardEvento(props) {
   return (
-    <div className="flex flex-col sm:max-w-72 w-full rounded-2xl overflow-hidden shadow-2xl">
+    <div className="flex flex-col sm:max-w-72 w-full rounded-2xl overflow-hidden shadow-2xl" id={props.id}>
       <img src={ props.src } alt="Imagem do evento"  />
       <div className="flex flex-col gap-2 p-6 bg-grafite">
         <TagEvento label={props.tag} />
