@@ -3,32 +3,49 @@ import Input from "./atoms/form/Input";
 import Select from "./atoms/form/Select";
 import Option from "./atoms/form/Option";
 import Button from "./atoms/Button";
+import { useState } from "react";
+import { temas } from './../utils/Temas';
 
 
 export default function FormularioDeEvento() {
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState("")
+
+  function formSubmit(formData) {
+    const evento = {
+      capa: formData.get('capaEvento'),
+      tema: temas.find((item) => {
+        return item.id == formData.get('tema')
+      }),
+      data: new Date(formData.get('dataEvento')),
+      titulo: formData.get('nomeEvento')
+    }
+    console.log('Formulário submetido!', evento)
+  }
+  
   return (
-    <form className="bg-grafite p-8 rounded-2xl flex flex-col gap-8 w-full max-w-100">
+    <form className="bg-grafite p-8 rounded-2xl flex flex-col gap-8 w-full max-w-100" action={formSubmit}>
       <h2 className="text text-xl">Preencha para criar um evento:</h2>
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="nome" texto="Qual o nome do evento?" />
-          <Input type="text" id="nome" placeholder="Summer dev hits" />
+          <LabelInput htmlFor="capaEvento" texto="Qual o endereço da imagem de capa?" />
+          <Input type="text" id="capaEvento" name="capaEvento" placeholder="http://..." />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="data" texto="Data do evento" />
-          <Input type="date" id="data" />
+          <LabelInput htmlFor="nomeEvento" texto="Qual o nome do evento?" />
+          <Input type="text" id="nomeEvento" name="nomeEvento" placeholder="Summer dev hits" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <LabelInput htmlFor="dataEvento" texto="Data do evento" />
+          <Input type="date" id="dataEvento" name="dataEvento" />
         </div>
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="tema" texto="Tema do evento" />
-          <Select defaultValue="" required>
-            <Option classes="text-cinza-medio" value="" selected disabled hidden>Selecione uma opção</Option>
-            <Option value="IA">IA</Option>
-            <Option value="Front-end">Front-end</Option>
-            <Option value="Backend">Backend</Option>
-            <Option value="Devops">Devops</Option>
-            <Option value="Data Science">Data Science</Option>
-            <Option value="Cloud">Cloud</Option>
+          <Select value={opcaoSelecionada} onChange={e => setOpcaoSelecionada(e.target.value)} id="tema" name="tema">
+            <Option classes="text-cinza-medio" value="" disabled hidden>Selecione uma opção</Option>
+            {temas.map((tema) => (
+              <Option key={tema.id} value={tema.id}>{tema.nome}</Option>
+            ))}
           </Select>
         </div>
       </div>

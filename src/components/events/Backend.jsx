@@ -4,21 +4,22 @@ import Container from "../atoms/events/layout/Container";
 import ContainerCards from "../atoms/events/layout/ContainerCards";
 
 import { eventosBackend } from "../../utils/Eventos";
+import { temas } from "../../utils/Temas";
 
 
 export default function Backend() {
   return (
     <Container>
-      <CategoryName nome="Back-end" />
+      <CategoryName nome={temas[2].nome} />
       <ContainerCards>
         {eventosBackend.map((evento) => (
           <CardEvento
             key={evento.id}
-            src={evento.src}
+            src={evento.capa}
             tag={evento.tag}
             data={evento.data}
-            title={evento.title}
-            description={evento.description}
+            title={evento.titulo}
+            description={evento.descricao}
           />
         ))}
       </ContainerCards>
