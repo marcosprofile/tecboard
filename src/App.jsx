@@ -13,22 +13,24 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <main className="flex flex-col items-center text-white">
+    <div className="flex flex-col items-center text-white">
       <Header />
-      <HeroSection />
-      <Section>
-        <FormularioDeEvento />
-      </Section>
-      <Section classes="gap-16">
-        <Frontend />
-        <Backend />
-        <Devops />
-        <InteligenciaArtificial />
-        <DataScience />
-        <Cloud />
-      </Section>
+      <main className="flex flex-col items-center text-white">
+        <HeroSection />
+        <Section>
+          <FormularioDeEvento />
+        </Section>
+        <Section classes="gap-16">
+          <Frontend />
+          <Backend />
+          <Devops />
+          <InteligenciaArtificial />
+          <DataScience />
+          <Cloud />
+        </Section>
+      </main>
       <Footer />
-    </main>
+    </div>
   )
 }
 
