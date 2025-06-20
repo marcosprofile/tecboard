@@ -3,8 +3,8 @@ import CategoryName from "../atoms/events/CategoryName";
 import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
 
-import { eventosFrontend } from "../../utils/Eventos";
 import { temas } from "../../utils/Temas";
+import { eventos } from "../../utils/Eventos";
 
 
 export default function Frontend() {
@@ -12,7 +12,7 @@ export default function Frontend() {
     <Container>
       <CategoryName nome={temas[1].nome} />
       <ContainerCards>
-        {eventosFrontend.map((evento) => (
+        {eventos[0].frontend.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}

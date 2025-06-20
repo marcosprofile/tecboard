@@ -7,7 +7,7 @@ import { useState } from "react";
 import { temas } from './../utils/Temas';
 
 
-export default function FormularioDeEvento() {
+export default function FormularioDeEvento(props) {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState("")
 
   function formSubmit(formData) {
@@ -23,7 +23,7 @@ export default function FormularioDeEvento() {
   }
   
   return (
-    <form className="bg-grafite p-8 rounded-2xl flex flex-col gap-8 w-full max-w-100" action={formSubmit}>
+    <form className="bg-grafite p-8 rounded-2xl flex flex-col gap-8 w-full max-w-100" action={formSubmit} {...props}>
       <h2 className="text text-xl">Preencha para criar um evento:</h2>
 
       <div className="flex flex-col gap-4">

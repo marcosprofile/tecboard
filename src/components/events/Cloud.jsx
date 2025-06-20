@@ -2,8 +2,9 @@ import Container from "../atoms/events/layout/Container";
 import CategoryName from "../atoms/events/CategoryName";
 import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
-import { eventosCloud } from "../../utils/Eventos";
+
 import { temas } from "../../utils/Temas";
+import { eventos } from "../../utils/Eventos";
 
 
 export default function Cloud() {
@@ -11,7 +12,7 @@ export default function Cloud() {
     <Container>
       <CategoryName nome={temas[5].nome} />
       <ContainerCards>
-        {eventosCloud.map((evento) => (
+        {eventos[0].cloud.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}

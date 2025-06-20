@@ -3,8 +3,8 @@ import CategoryName from "../atoms/events/CategoryName";
 import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
 
-import { eventosDevops } from "../../utils/Eventos";
 import { temas } from "../../utils/Temas";
+import { eventos } from "../../utils/Eventos";
 
 
 export default function Devops() {
@@ -12,7 +12,7 @@ export default function Devops() {
     <Container>
       <CategoryName nome={temas[4].nome} />
       <ContainerCards>
-        {eventosDevops.map((evento) => (
+        {eventos[0].devops.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}
