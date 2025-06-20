@@ -12,13 +12,17 @@ import Footer from './components/Footer';
 
 
 function App() {
+  function adicionarEvento(evento) {
+    console.table(evento)
+  }
+
   return (
     <div className="flex flex-col items-center text-white">
       <Header />
       <main className="flex flex-col items-center text-white">
         <HeroSection />
         <Section>
-          <FormularioDeEvento />
+          <FormularioDeEvento onSubmit={adicionarEvento} />
         </Section>
         <Section classes="gap-16">
           <Frontend />
