@@ -3,16 +3,15 @@ import CategoryName from "../atoms/events/CategoryName";
 import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
 
-import { eventos } from "../../utils/Eventos";
 import { temas } from "../../utils/Temas";
 
 
-export default function InteligenciaArtificial() {
+export default function InteligenciaArtificial({ data }) {
   return (
     <Container>
-      <CategoryName nome={temas[0].nome} />
+      <CategoryName nome={temas[3].nome} />
       <ContainerCards>
-        {eventos[0].ia.map((evento) => (
+        {data.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}

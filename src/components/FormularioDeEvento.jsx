@@ -6,13 +6,17 @@ import Button from "./atoms/Button";
 import { useState } from "react";
 import { temas } from './../utils/Temas';
 import { eventos } from './../utils/Eventos';
+import Textarea from "./atoms/form/Textarea";
+import { toast } from "react-toastify";
 
 
 export default function FormularioDeEvento({ onSubmit }) {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState("")
 
+  const success = () => toast.success('Evento criado com sucesso!')
+
   function gerarIdUnico() {
-    const todos = Object.values(eventos[0]).flat()
+    const todos = Object.values(eventos).flat()
     const maxId = todos.length ? Math.max(...todos.map(e => e.id || 0)) : 0
     return maxId + 1
   }
@@ -21,17 +25,22 @@ export default function FormularioDeEvento({ onSubmit }) {
     const temaId = parseInt(formData.get('tema'))
     const temaObj = temas.find((item) => item.id === temaId)
 
+    const dateString = formData.get('dataEvento');
+    const [year, month, day] = dateString.split('-').map(Number)
+    const localDate = new Date(year, month - 1, day)
+
     const evento = {
       id: gerarIdUnico(),
       idTema: temaId,
       capa: formData.get('capaEvento'),
       tag: temaObj.nome,
-      data: new Date(formData.get('dataEvento')).toLocaleDateString('pt-BR'),
-      titulo: formData.get('nomeEvento')
+      data: localDate.toLocaleDateString('pt-BR'),
+      titulo: formData.get('nomeEvento'),
+      descricao: formData.get('descricaoEvento')
     }
 
+    console.log('Evento criado:', evento)
     onSubmit(evento)
-    console.table(evento)
   }
   
   return (
@@ -41,6 +50,8 @@ export default function FormularioDeEvento({ onSubmit }) {
         e.preventDefault()
         const formData = new FormData(e.target)
         formSubmit(formData)
+        e.target.reset()
+        setOpcaoSelecionada('')
       }}
       action={formSubmit}
     >
@@ -48,19 +59,23 @@ export default function FormularioDeEvento({ onSubmit }) {
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="capaEvento" texto="Qual o endereço da imagem de capa?" />
+          <LabelInput htmlFor="capaEvento" texto="Endereço da imagem de capa" />
           <Input type="text" id="capaEvento" name="capaEvento" placeholder="http://..." />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="nomeEvento" texto="Qual o nome do evento?" />
+          <LabelInput htmlFor="nomeEvento" texto="Título" />
           <Input type="text" id="nomeEvento" name="nomeEvento" placeholder="Summer dev hits" />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="dataEvento" texto="Data do evento" />
+          <LabelInput htmlFor="descricaoEvento" texto="Descrição" />
+          <Textarea id="descricaoEvento" name="descricaoEvento" placeholder="Digite aqui..." />
+        </div>
+        <div className="flex flex-col gap-2">
+          <LabelInput htmlFor="dataEvento" texto="Data" />
           <Input type="date" id="dataEvento" name="dataEvento" />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="tema" texto="Tema do evento" />
+          <LabelInput htmlFor="tema" texto="Tema" />
           <Select value={opcaoSelecionada} onChange={e => setOpcaoSelecionada(e.target.value)} id="tema" name="tema">
             <Option classes="text-cinza-medio" value="" disabled hidden>Selecione uma opção</Option>
             {temas.map((tema) => (
@@ -69,7 +84,7 @@ export default function FormularioDeEvento({ onSubmit }) {
           </Select>
         </div>
       </div>
-      <Button type="submit" label="Criar evento" />
+      <Button type="submit" label="Criar evento" onClick={success} />
     </form>
   )
 }

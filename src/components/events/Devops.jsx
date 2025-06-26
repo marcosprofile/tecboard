@@ -4,15 +4,14 @@ import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
 
 import { temas } from "../../utils/Temas";
-import { eventos } from "../../utils/Eventos";
 
 
-export default function Devops() {
+export default function Devops({ data }) {
   return (
     <Container>
-      <CategoryName nome={temas[4].nome} />
+      <CategoryName nome={temas[2].nome} />
       <ContainerCards>
-        {eventos[0].devops.map((evento) => (
+        {data.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}

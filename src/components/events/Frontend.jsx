@@ -4,15 +4,14 @@ import ContainerCards from "../atoms/events/layout/ContainerCards";
 import CardEvento from "../atoms/events/CardEvento";
 
 import { temas } from "../../utils/Temas";
-import { eventos } from "../../utils/Eventos";
 
 
-export default function Frontend() {
+export default function Frontend({ data }) {
   return (
     <Container>
-      <CategoryName nome={temas[1].nome} />
+      <CategoryName nome={temas[0].nome} />
       <ContainerCards>
-        {eventos[0].frontend.map((evento) => (
+        {data.map((evento) => (
           <CardEvento
             key={evento.id}
             src={evento.capa}

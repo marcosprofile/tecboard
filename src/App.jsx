@@ -9,33 +9,12 @@ import InteligenciaArtificial from './components/events/InteligenciaArtificial';
 import DataScience from './components/events/DataScience';
 import Cloud from './components/events/Cloud';
 import Footer from './components/Footer';
-import { eventos } from './utils/Eventos';
+import useEventos from './hooks/eventos';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
-  function getTemaKey(id) {
-    const temas = {
-      0: 'frontend',
-      1: 'backend',
-      2: 'devops',
-      3: 'ia',
-      4: 'dataScience',
-      5: 'cloud'
-    }
-    return temas[id]
-  }
-
-  function adicionarEvento(evento) {
-    const temaKey = getTemaKey(evento.idTema)
-
-    const { idTema: _, ...eventoSemIdTema } = evento
-
-    eventos[0][temaKey].push(eventoSemIdTema)
-
-    console.log(`Evento adicionado em ${temaKey}`)
-    console.table(eventoSemIdTema)
-    console.table(eventos)
-  }
+  const { eventos, adicionarEvento } = useEventos()
 
   return (
     <div className="flex flex-col items-center text-white">
@@ -46,13 +25,14 @@ function App() {
           <FormularioDeEvento onSubmit={adicionarEvento} />
         </Section>
         <Section classes="gap-16">
-          <Frontend />
-          <Backend />
-          <Devops />
-          <InteligenciaArtificial />
-          <DataScience />
-          <Cloud />
+          <Frontend data={eventos.frontend} />
+          <Backend data={eventos.backend} />
+          <Devops data={eventos.devops} />
+          <InteligenciaArtificial data={eventos.ia} />
+          <DataScience data={eventos.dataScience} />
+          <Cloud data={eventos.cloud} />
         </Section>
+        <ToastContainer autoClose={3000} />
       </main>
       <Footer />
     </div>
