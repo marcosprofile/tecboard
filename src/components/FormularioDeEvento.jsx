@@ -58,11 +58,11 @@ export default function FormularioDeEvento({ onSubmit }) {
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="capaEvento" texto="Endereço da imagem de capa" />
+          <LabelInput htmlFor="capaEvento" texto="Endereço da imagem de capa" obrigatorio />
           <Input type="text" id="capaEvento" name="capaEvento" placeholder="http://..." required />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="nomeEvento" texto="Título" />
+          <LabelInput htmlFor="nomeEvento" texto="Título" obrigatorio />
           <Input type="text" id="nomeEvento" name="nomeEvento" placeholder="Summer dev hits" required />
         </div>
         <div className="flex flex-col gap-2">
@@ -70,11 +70,11 @@ export default function FormularioDeEvento({ onSubmit }) {
           <Textarea id="descricaoEvento" name="descricaoEvento" placeholder="Digite aqui..." />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="dataEvento" texto="Data" />
+          <LabelInput htmlFor="dataEvento" texto="Data" obrigatorio />
           <Input type="date" id="dataEvento" name="dataEvento" required />
         </div>
         <div className="flex flex-col gap-2">
-          <LabelInput htmlFor="tema" texto="Tema" />
+          <LabelInput htmlFor="tema" texto="Tema" obrigatorio />
           <Select value={opcaoSelecionada} onChange={e => setOpcaoSelecionada(e.target.value)} id="tema" name="tema" required>
             <Option classes="text-cinza-medio" value="" disabled hidden>Selecione uma opção</Option>
             {temas.map((tema) => (
