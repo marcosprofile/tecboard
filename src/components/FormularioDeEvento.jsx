@@ -5,20 +5,31 @@ import Option from "./atoms/form/Option";
 import Button from "./atoms/Button";
 import { useState } from "react";
 import { temas } from './../utils/Temas';
+import { eventos } from './../utils/Eventos';
 
 
 export default function FormularioDeEvento({ onSubmit }) {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState("")
 
+  function gerarIdUnico() {
+    const todos = Object.values(eventos[0]).flat()
+    const maxId = todos.length ? Math.max(...todos.map(e => e.id || 0)) : 0
+    return maxId + 1
+  }
+
   function formSubmit(formData) {
+    const temaId = parseInt(formData.get('tema'))
+    const temaObj = temas.find((item) => item.id === temaId)
+
     const evento = {
+      id: gerarIdUnico(),
+      idTema: temaId,
       capa: formData.get('capaEvento'),
-      tema: temas.find((item) => {
-        return item.id == formData.get('tema')
-      }),
-      data: new Date(formData.get('dataEvento')),
+      tag: temaObj.nome,
+      data: new Date(formData.get('dataEvento')).toLocaleDateString('pt-BR'),
       titulo: formData.get('nomeEvento')
     }
+
     onSubmit(evento)
     console.table(evento)
   }
@@ -31,6 +42,7 @@ export default function FormularioDeEvento({ onSubmit }) {
         const formData = new FormData(e.target)
         formSubmit(formData)
       }}
+      action={formSubmit}
     >
       <h2 className="text text-xl">Preencha para criar um evento:</h2>
 

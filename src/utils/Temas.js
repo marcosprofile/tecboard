@@ -1,15 +1,19 @@
 export const temas = [
   {
-    id: 1,
-    nome: 'Inteligência Artificial'
-  },
-  {
-    id: 2,
+    id: 0,
     nome: 'Front-end'
   },
   {
-    id: 3,
+    id: 1,
     nome: 'Back-end'
+  },
+  {
+    id: 2,
+    nome: 'Devops'
+  },
+  {
+    id: 3,
+    nome: 'Inteligência Artificial'
   },
   {
     id: 4,
@@ -17,10 +21,6 @@ export const temas = [
   },
   {
     id: 5,
-    nome: 'Devops'
-  },
-  {
-    id: 6,
     nome: 'Cloud'
   },
 ]

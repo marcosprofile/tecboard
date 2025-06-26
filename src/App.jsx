@@ -9,11 +9,32 @@ import InteligenciaArtificial from './components/events/InteligenciaArtificial';
 import DataScience from './components/events/DataScience';
 import Cloud from './components/events/Cloud';
 import Footer from './components/Footer';
+import { eventos } from './utils/Eventos';
 
 
 function App() {
+  function getTemaKey(id) {
+    const temas = {
+      0: 'frontend',
+      1: 'backend',
+      2: 'devops',
+      3: 'ia',
+      4: 'dataScience',
+      5: 'cloud'
+    }
+    return temas[id]
+  }
+
   function adicionarEvento(evento) {
-    console.table(evento)
+    const temaKey = getTemaKey(evento.idTema)
+
+    const { idTema: _, ...eventoSemIdTema } = evento
+
+    eventos[0][temaKey].push(eventoSemIdTema)
+
+    console.log(`Evento adicionado em ${temaKey}`)
+    console.table(eventoSemIdTema)
+    console.table(eventos)
   }
 
   return (
