@@ -13,8 +13,6 @@ import { toast } from "react-toastify";
 export default function FormularioDeEvento({ onSubmit }) {
   const [opcaoSelecionada, setOpcaoSelecionada] = useState("")
 
-  const success = () => toast.success('Evento criado com sucesso!')
-
   function gerarIdUnico() {
     const todos = Object.values(eventos).flat()
     const maxId = todos.length ? Math.max(...todos.map(e => e.id || 0)) : 0
@@ -40,6 +38,7 @@ export default function FormularioDeEvento({ onSubmit }) {
     }
 
     console.log('Evento criado:', evento)
+    toast.success('Evento criado com sucesso!')
     onSubmit(evento)
   }
   
@@ -60,11 +59,11 @@ export default function FormularioDeEvento({ onSubmit }) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="capaEvento" texto="Endereço da imagem de capa" />
-          <Input type="text" id="capaEvento" name="capaEvento" placeholder="http://..." />
+          <Input type="text" id="capaEvento" name="capaEvento" placeholder="http://..." required />
         </div>
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="nomeEvento" texto="Título" />
-          <Input type="text" id="nomeEvento" name="nomeEvento" placeholder="Summer dev hits" />
+          <Input type="text" id="nomeEvento" name="nomeEvento" placeholder="Summer dev hits" required />
         </div>
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="descricaoEvento" texto="Descrição" />
@@ -72,11 +71,11 @@ export default function FormularioDeEvento({ onSubmit }) {
         </div>
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="dataEvento" texto="Data" />
-          <Input type="date" id="dataEvento" name="dataEvento" />
+          <Input type="date" id="dataEvento" name="dataEvento" required />
         </div>
         <div className="flex flex-col gap-2">
           <LabelInput htmlFor="tema" texto="Tema" />
-          <Select value={opcaoSelecionada} onChange={e => setOpcaoSelecionada(e.target.value)} id="tema" name="tema">
+          <Select value={opcaoSelecionada} onChange={e => setOpcaoSelecionada(e.target.value)} id="tema" name="tema" required>
             <Option classes="text-cinza-medio" value="" disabled hidden>Selecione uma opção</Option>
             {temas.map((tema) => (
               <Option key={tema.id} value={tema.id}>{tema.nome}</Option>
@@ -84,7 +83,7 @@ export default function FormularioDeEvento({ onSubmit }) {
           </Select>
         </div>
       </div>
-      <Button type="submit" label="Criar evento" onClick={success} />
+      <Button type="submit" label="Criar evento" />
     </form>
   )
 }
